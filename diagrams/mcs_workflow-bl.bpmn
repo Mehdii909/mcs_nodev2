@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_102ycq6" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+  <bpmn:collaboration id="Collaboration_002lv25">
+    <bpmn:participant id="Participant_0hi3kkw" name="Valider livraison" processRef="mcs_workflow_BL" />
+  </bpmn:collaboration>
+  <bpmn:process id="mcs_workflow_BL" isExecutable="true">
+    <bpmn:userTask id="Activity_13j0761" name="Comfirmer la creation du BL">
+      <bpmn:incoming>Flow_1839xsr</bpmn:incoming>
+      <bpmn:outgoing>Flow_0klxxaw</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_1t0mgce" name="confirmation de livreur">
+      <bpmn:incoming>Flow_0klxxaw</bpmn:incoming>
+      <bpmn:outgoing>Flow_1m077ww</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Activity_12vjboh" name="livraisons (livreure)" camunda:type="external" camunda:topic="livraison">
+      <bpmn:incoming>Flow_1m077ww</bpmn:incoming>
+      <bpmn:outgoing>Flow_1v1unk5</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_1tzp9y9">
+      <bpmn:incoming>Flow_1v1unk5</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1839xsr</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0klxxaw" sourceRef="Activity_13j0761" targetRef="Activity_1t0mgce" />
+    <bpmn:sequenceFlow id="Flow_1m077ww" sourceRef="Activity_1t0mgce" targetRef="Activity_12vjboh" />
+    <bpmn:sequenceFlow id="Flow_1v1unk5" sourceRef="Activity_12vjboh" targetRef="Event_1tzp9y9" />
+    <bpmn:sequenceFlow id="Flow_1839xsr" sourceRef="StartEvent_1" targetRef="Activity_13j0761" />
+    <bpmn:textAnnotation id="TextAnnotation_04b1jv6">
+      <bpmn:text>notifier le back end de la confirmation de livraison par le livreure</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="TextAnnotation_1psn45u">
+      <bpmn:text>En attente de la livraison</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0n2rwl3" sourceRef="Activity_12vjboh" targetRef="TextAnnotation_04b1jv6" />
+    <bpmn:association id="Association_0t9g2pr" sourceRef="Activity_1t0mgce" targetRef="TextAnnotation_1psn45u" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_002lv25">
+      <bpmndi:BPMNShape id="Participant_0hi3kkw_di" bpmnElement="Participant_0hi3kkw" isHorizontal="true">
+        <dc:Bounds x="127" y="85" width="720" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1839xsr_di" bpmnElement="Flow_1839xsr">
+        <di:waypoint x="215" y="230" />
+        <di:waypoint x="276" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1v1unk5_di" bpmnElement="Flow_1v1unk5">
+        <di:waypoint x="691" y="230" />
+        <di:waypoint x="788" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1m077ww_di" bpmnElement="Flow_1m077ww">
+        <di:waypoint x="536" y="230" />
+        <di:waypoint x="591" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0klxxaw_di" bpmnElement="Flow_0klxxaw">
+        <di:waypoint x="376" y="230" />
+        <di:waypoint x="436" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_13j0761_di" bpmnElement="Activity_13j0761">
+        <dc:Bounds x="276" y="190" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1t0mgce_di" bpmnElement="Activity_1t0mgce">
+        <dc:Bounds x="436" y="190" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_12vjboh_di" bpmnElement="Activity_12vjboh">
+        <dc:Bounds x="591" y="190" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1tzp9y9_di" bpmnElement="Event_1tzp9y9">
+        <dc:Bounds x="788" y="212" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="212" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_04b1jv6_di" bpmnElement="TextAnnotation_04b1jv6">
+        <dc:Bounds x="666" y="105" width="150" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1psn45u_di" bpmnElement="TextAnnotation_1psn45u">
+        <dc:Bounds x="516" y="110" width="100" height="40" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0n2rwl3_di" bpmnElement="Association_0n2rwl3">
+        <di:waypoint x="671" y="190" />
+        <di:waypoint x="696" y="155" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0t9g2pr_di" bpmnElement="Association_0t9g2pr">
+        <di:waypoint x="516" y="190" />
+        <di:waypoint x="547" y="150" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
